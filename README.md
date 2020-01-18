@@ -33,7 +33,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+When the emulator is launched after running the code in Android Studio, it gives an error "ADB.exe is obsolete and has serious performance problems". Check this click on how to solve it https://stackoverflow.com/questions/51240223/adb-exe-is-obsolete-and-has-serious-performance-problems.
 
 ## License
 
