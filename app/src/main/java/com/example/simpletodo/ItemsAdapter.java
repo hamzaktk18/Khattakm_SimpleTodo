@@ -13,27 +13,21 @@ import java.util.List;
 // take data from model and display into a row in the recycler viewpublic class ItemsAdapter {
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> {
 
+    public interface OnClickListener{
+        void onItemClicked(int position);
+    }
     public interface OnLongClickListener {
         void onItemLongClicked(int position);
     }
 
     List<String> items;
     OnLongClickListener longClickListener;
+    OnClickListener clickListener;
 
-//    public ItemsAdapter(List<String> items) {
-//        this.items = items;
-//    }
-////
-////
-//    OnLongClickListener longClickListener;
-//    public interface OnLongClickListener {
-//        void onItemLongClicked(int position);
-//    }
-
-
-    public ItemsAdapter(List<String> items, OnLongClickListener longClickListener)  {
+    public ItemsAdapter(List<String> items, OnLongClickListener longClickListener, OnClickListener clickListener)  {
         this.items = items;
         this.longClickListener = longClickListener;
+        this.clickListener = clickListener;
     }
 
     @NonNull
@@ -75,11 +69,17 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
         // update the vie winside of the view holder with this data
         public void bind(String item) {
             tvItem.setText(item);
+            tvItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    clickListener.onItemClicked(getAdapterPosition());
+                }
+            });
             tvItem.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    // notify the listener which position was long pressed
                     longClickListener.onItemLongClicked(getAdapterPosition());
+                    // notify the listener which position was long pressed
                     return true;
                 }
             });
